@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Українці на Кіпрі · Гід</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f5f7fa;
+      --ink: #2c2e35;
+      --muted: #909aaa;
+      --accent: #7a9bbf;
+      --accent2: #c8b96e;
+      --line: #dce3ed;
+      --card: #ffffff;
+      --hero-bg: linear-gradient(160deg, #eef2f8 0%, #fafbf4 100%);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 56px;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    .lang-toggle {
+      background: none;
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      padding: 3px 10px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
+    .lang-toggle.uk {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+    }
+
+    /* HERO */
+    .hero {
+      padding: 140px 40px 80px;
+      max-width: 760px;
+      margin: 0 auto;
+      animation: fadeUp 0.8s ease both;
+    }
+    .ua-stripe {
+      display: flex;
+      margin-bottom: 28px;
+    }
+    .ua-stripe::before {
+      content: '';
+      display: block;
+      width: 36px; height: 3px;
+      background: #a8c4d8;
+      border-radius: 2px 0 0 2px;
+    }
+    .ua-stripe::after {
+      content: '';
+      display: block;
+      width: 36px; height: 3px;
+      background: #d6c97a;
+      border-radius: 0 2px 2px 0;
+    }
+    .hero-tag {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 6vw, 58px);
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 24px;
+      letter-spacing: -0.01em;
+    }
+    .hero h1 em { font-style: italic; color: #6b8faf; }
+    .hero p { color: var(--muted); max-width: 480px; font-size: 15px; line-height: 1.8; }
+    .hero-line { width: 48px; height: 1px; background: #a8c4d8; margin: 32px 0; }
+
+    /* SECTIONS */
+    main { max-width: 760px; margin: 0 auto; padding: 0 40px 100px; }
+    section { margin-bottom: 72px; animation: fadeUp 0.6s ease both; }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+    .section-num { font-family: 'Cormorant Garamond', serif; font-size: 13px; color: var(--muted); letter-spacing: 0.08em; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; letter-spacing: 0.01em; color: #5a6475; }
+
+    /* CARDS */
+    .cards { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    .card { background: var(--card); padding: 24px 28px; transition: background 0.2s; }
+    .card:hover { background: #fafaf8; }
+    .card-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+    .card-text { font-size: 14px; color: var(--ink); line-height: 1.7; }
+    .card-link { display: inline-block; margin-top: 10px; font-size: 13px; color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+    .card-link:hover { border-color: var(--accent); }
+
+    /* CONTACTS */
+    .contacts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    .contact-item { background: var(--card); padding: 20px 24px; }
+    .contact-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .contact-value { font-size: 14px; color: var(--ink); }
+    .contact-value a { color: var(--accent); text-decoration: none; }
+    .contact-value a:hover { text-decoration: underline; }
+
+    /* STEPS */
+    .steps { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    .step { background: var(--card); padding: 20px 28px; display: grid; grid-template-columns: 32px 1fr; gap: 16px; align-items: start; }
+    .step-n { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: #7a9bbf; line-height: 1.4; }
+    .step-text { font-size: 14px; line-height: 1.7; }
+    .step-text strong { font-weight: 400; color: var(--ink); }
+
+    /* NOTICE */
+    .notice { border-left: 2px solid var(--accent2); padding: 16px 20px; background: #fdfcf5; font-size: 13px; color: var(--muted); margin-top: 20px; line-height: 1.7; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--line); padding: 32px 40px; max-width: 760px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 12px; letter-spacing: 0.04em; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    section:nth-child(1) { animation-delay: 0.1s; }
+    section:nth-child(2) { animation-delay: 0.2s; }
+    section:nth-child(3) { animation-delay: 0.3s; }
+    section:nth-child(4) { animation-delay: 0.4s; }
+    section:nth-child(5) { animation-delay: 0.5s; }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 20px; }
+      .nav-links { gap: 16px; }
+      .hero, main { padding-left: 20px; padding-right: 20px; }
+      .contacts-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">Українці на Кіпрі</a>
+  <ul class="nav-links">
+    <li><a href="#docs" data-ru="Документы" data-uk="Документи">Документы</a></li>
+    <li><a href="#help" data-ru="Помощь" data-uk="Допомога">Помощь</a></li>
+    <li><a href="#contacts" data-ru="Контакты" data-uk="Контакти">Контакты</a></li>
+    <li><a href="#work" data-ru="Работа" data-uk="Робота">Работа</a></li>
+    <li><button class="lang-toggle" id="langBtn" onclick="toggleLang()">УК</button></li>
+  </ul>
+</nav>
+
+<div class="hero" style="background: var(--hero-bg);">
+  <div class="ua-stripe"></div>
+  <p class="hero-tag" data-ru="Гид для украинцев · Кипр" data-uk="Гід для українців · Кіпр">Гид для украинцев · Кипр <span class="year-range"></span></p>
+  <h1 data-ru="Приехали на Кипр —<br><em>с чего начать?</em>" data-uk="Приїхали на Кіпр —<br><em>з чого почати?</em>">Приехали на Кипр —<br><em>с чего начать?</em></h1>
+  <div class="hero-line"></div>
+  <p data-ru="Здесь собрано главное: как оформить документы, куда звонить, где искать помощь." data-uk="Тут зібране головне: як оформити документи, куди телефонувати, де шукати допомогу.">Здесь собрано главное: как оформить документы, куда звонить, где искать помощь.</p>
+</div>
+
+<main>
+
+  <section id="docs">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title" data-ru="Временная защита" data-uk="Тимчасовий захист">Временная защита</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="step-n">1</span>
+        <div class="step-text" data-ru="&lt;strong&gt;Заполните заявку онлайн&lt;/strong&gt; — на сайте Asylum Service (Министерство внутренних дел Кипра). Там нужны ваши личные данные и email." data-uk="&lt;strong&gt;Заповніть заявку онлайн&lt;/strong&gt; — на сайті Asylum Service (Міністерство внутрішніх справ Кіпру). Потрібні особисті дані та email."><strong>Заполните заявку онлайн</strong> — на сайте Asylum Service (Министерство внутренних дел Кипра). Там нужны ваши личные данные и email.</div>
+      </div>
+      <div class="step">
+        <span class="step-n">2</span>
+        <div class="step-text" data-ru="&lt;strong&gt;Ждите письма на почту.&lt;/strong&gt; Когда придёт подтверждение — распечатайте его, оно понадобится." data-uk="&lt;strong&gt;Чекайте листа на пошту.&lt;/strong&gt; Коли прийде підтвердження — роздрукуйте його, воно знадобиться."><strong>Ждите письма на почту.</strong> Когда придёт подтверждение — распечатайте его, оно понадобится.</div>
+      </div>
+      <div class="step">
+        <span class="step-n">3</span>
+        <div class="step-text" data-ru="&lt;strong&gt;Заполните анкету&lt;/strong&gt; на сайте Миграционного департамента. Это отдельный шаг после письма." data-uk="&lt;strong&gt;Заповніть анкету&lt;/strong&gt; на сайті Міграційного департаменту. Це окремий крок після листа."><strong>Заполните анкету</strong> на сайте Миграционного департамента. Это отдельный шаг после письма.</div>
+      </div>
+      <div class="step">
+        <span class="step-n">4</span>
+        <div class="step-text" data-ru="&lt;strong&gt;Придите лично&lt;/strong&gt; в иммиграционный офис — возьмут фото и отпечатки пальцев. Без этого карточку не выдадут." data-uk="&lt;strong&gt;Прийдіть особисто&lt;/strong&gt; до імміграційного офісу — знімуть фото та відбитки пальців. Без цього картку не видадуть."><strong>Придите лично</strong> в иммиграционный офис — возьмут фото и отпечатки пальцев. Без этого карточку не выдадут.</div>
+      </div>
+    </div>
+    <div class="notice" data-ru="Статус даёт право жить, работать, получать медпомощь и отдать детей в школу. Действует минимум год, потом можно продлить." data-uk="Статус дає право жити, працювати, отримувати медичну допомогу й віддати дітей до школи. Діє мінімум рік, потім можна продовжити.">
+      Статус даёт право жить, работать, получать медпомощь и отдать детей в школу. Действует минимум год, потом можно продлить.
+    </div>
+  </section>
+
+  <section id="help">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title" data-ru="Где искать помощь" data-uk="Де шукати допомогу">Где искать помощь</h2>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <p class="card-label" data-ru="Главный сайт" data-uk="Головний сайт">Главный сайт</p>
+        <p class="card-text" data-ru="ukr.cy — здесь много всего: документы, жильё, работа, школы. Хорошее место, чтобы начать разбираться." data-uk="ukr.cy — тут багато всього: документи, житло, робота, школи. Гарне місце, щоб почати розбиратися.">ukr.cy — здесь много всего: документы, жильё, работа, школы. Хорошее место, чтобы начать разбираться.</p>
+        <a class="card-link" href="https://ukr.cy" target="_blank">ukr.cy →</a>
+      </div>
+      <div class="card">
+        <p class="card-label" data-ru="База от украинцев" data-uk="База від українців">База от украинцев</p>
+        <p class="card-text" data-ru="Notion-страница, которую собирали сами украинцы на Кипре. Ссылки на организации, юристов, жильё — всё проверенное." data-uk="Notion-сторінка, яку збирали самі українці на Кіпрі. Посилання на організації, юристів, житло — все перевірене.">Notion-страница, которую собирали сами украинцы на Кипре. Ссылки на организации, юристов, жильё — всё проверенное.</p>
+        <a class="card-link" href="https://help-ukraine-cyprus.notion.site/e83a164efab8487da67fe602d6cf7af3" target="_blank" data-ru="Открыть →" data-uk="Відкрити →">Открыть →</a>
+      </div>
+      <div class="card">
+        <p class="card-label" data-ru="Юрист в Telegram" data-uk="Юрист у Telegram">Юрист в Telegram</p>
+        <p class="card-text" data-ru="Канал, где можно задать вопросы про статус, документы, права. Удобно, если не знаете, с чего начать." data-uk="Канал, де можна поставити питання про статус, документи, права. Зручно, якщо не знаєте, з чого почати.">Канал, где можно задать вопросы про статус, документы, права. Удобно, если не знаете, с чего начать.</p>
+        <a class="card-link" href="https://t.me/juristkipr" target="_blank">t.me/juristkipr →</a>
+      </div>
+      <div class="card">
+        <p class="card-label" data-ru="Новости и обновления" data-uk="Новини та оновлення">Новости и обновления</p>
+        <p class="card-text" data-ru="Telegram-канал с актуальным — что изменилось в законах, полезные объявления, советы от тех, кто уже разобрался." data-uk="Telegram-канал з актуальним — що змінилося в законах, корисні оголошення, поради від тих, хто вже розібрався.">Telegram-канал с актуальным — что изменилось в законах, полезные объявления, советы от тех, кто уже разобрался.</p>
+        <a class="card-link" href="https://t.me/cy_walks/8089" target="_blank">Telegram →</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacts">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title" data-ru="Куда звонить и идти" data-uk="Куди дзвонити й іти">Куда звонить и идти</h2>
+    </div>
+    <div class="contacts-grid">
+      <div class="contact-item">
+        <p class="contact-label" data-ru="Адрес в Никосии" data-uk="Адреса в Нікосії">Адрес в Никосии</p>
+        <p class="contact-value">ул. Андреа Миаули, 10<br/>Энгоми, Македонитисса</p>
+      </div>
+      <div class="contact-item">
+        <p class="contact-label" data-ru="Телефон офиса" data-uk="Телефон офісу">Телефон офиса</p>
+        <p class="contact-value"><a href="tel:+35722464380">+357 22 464 380</a></p>
+      </div>
+      <div class="contact-item">
+        <p class="contact-label" data-ru="Горячая линия" data-uk="Гаряча лінія">Горячая линия</p>
+        <p class="contact-value"><a href="tel:+35796109331">+357 96 109 331</a></p>
+      </div>
+      <div class="contact-item">
+        <p class="contact-label" data-ru="По вопросам статуса" data-uk="З питань статусу">По вопросам статуса</p>
+        <p class="contact-value" data-ru="Есть отдельный call-центр по временной защите — спросите номер на горячей линии" data-uk="Є окремий call-центр з тимчасового захисту — запитайте номер на гарячій лінії">Есть отдельный call-центр по временной защите — спросите номер на горячей линии</p>
+      </div>
+      <div class="contact-item">
+        <p class="contact-label" data-ru="Консульство Украины" data-uk="Консульство України">Консульство Украины</p>
+        <p class="contact-value" data-ru="Если нужна официальная помощь от украинской стороны — сюда" data-uk="Якщо потрібна офіційна допомога від української сторони — сюди">Если нужна официальная помощь от украинской стороны — сюда</p>
+      </div>
+      <div class="contact-item">
+        <p class="contact-label" data-ru="Соцслужбы Кипра" data-uk="Соцслужби Кіпру">Соцслужбы Кипра</p>
+        <p class="contact-value" data-ru="Офисы в Никосии и Лимассоле — по вопросам пособий и поддержки" data-uk="Офіси в Нікосії та Лімасолі — з питань допомоги та підтримки">Офисы в Никосии и Лимассоле — по вопросам пособий и поддержки</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title" data-ru="Работа и жильё" data-uk="Робота та житло">Работа и жильё</h2>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <p class="card-label" data-ru="Найти работу" data-uk="Знайти роботу">Найти работу</p>
+        <p class="card-text" data-ru="Со статусом временной защиты работать можно официально. Смотрите вакансии на Bazaraki и в украинских Telegram-группах — там много живых объявлений." data-uk="Зі статусом тимчасового захисту можна працювати офіційно. Дивіться вакансії на Bazaraki та в українських Telegram-групах — там багато живих оголошень.">Со статусом временной защиты работать можно официально. Смотрите вакансии на Bazaraki и в украинских Telegram-группах — там много живых объявлений.</p>
+        <a class="card-link" href="https://www.bazaraki.com" target="_blank">bazaraki.com →</a>
+      </div>
+      <div class="card">
+        <p class="card-label" data-ru="Найти жильё" data-uk="Знайти житло">Найти жильё</p>
+        <p class="card-text" data-ru="Бот @BazarakiWatcherBot следит за новыми объявлениями об аренде и присылает в Telegram — чтобы не обновлять сайт вручную." data-uk="Бот @BazarakiWatcherBot стежить за новими оголошеннями про оренду й надсилає в Telegram — щоб не оновлювати сайт вручну.">Бот @BazarakiWatcherBot следит за новыми объявлениями об аренде и присылает в Telegram — чтобы не обновлять сайт вручную.</p>
+      </div>
+      <div class="card">
+        <p class="card-label" data-ru="Вакансии в Telegram" data-uk="Вакансії в Telegram">Вакансии в Telegram</p>
+        <p class="card-text" data-ru="В украинских группах на Кипре люди делятся работой, ищут сотрудников, публикуют резюме. Живее, чем любой сайт." data-uk="В українських групах на Кіпрі люди діляться роботою, шукають співробітників, публікують резюме. Живіше, ніж будь-який сайт.">В украинских группах на Кипре люди делятся работой, ищут сотрудников, публикуют резюме. Живее, чем любой сайт.</p>
+      </div>
+      <div class="card">
+        <p class="card-label" data-ru="Дети и школа" data-uk="Діти та школа">Дети и школа</p>
+        <p class="card-text" data-ru="Дети с временной защитой учатся в кипрских школах бесплатно. Запись — через Министерство образования, лучше не затягивать." data-uk="Діти з тимчасовим захистом навчаються в кіпрських школах безкоштовно. Запис — через Міністерство освіти, краще не зволікати.">Дети с временной защитой учатся в кипрских школах бесплатно. Запись — через Министерство образования, лучше не затягивать.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="medicine">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title" data-ru="Медицина" data-uk="Медицина">Медицина</h2>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <p class="card-label" data-ru="Как получить помощь" data-uk="Як отримати допомогу">Как получить помощь</p>
+        <p class="card-text" data-ru="С временной защитой вы входите в систему GESY — государственное здравоохранение Кипра. Идите в государственные поликлиники, не в частные." data-uk="З тимчасовим захистом ви входите в систему GESY — державна охорона здоров'я Кіпру. Йдіть до державних поліклінік, не до приватних.">С временной защитой вы входите в систему GESY — государственное здравоохранение Кипра. Идите в государственные поликлиники, не в частные.</p>
+      </div>
+      <div class="card">
+        <p class="card-label" data-ru="Что взять с собой" data-uk="Що взяти з собою">Что взять с собой</p>
+        <p class="card-text" data-ru="Документ о временной защите + паспорт. Для детей — свидетельство о рождении. Лучше брать всё сразу, чтобы не ездить дважды." data-uk="Документ про тимчасовий захист + паспорт. Для дітей — свідоцтво про народження. Краще брати все одразу, щоб не їздити двічі.">Документ о временной защите + паспорт. Для детей — свидетельство о рождении. Лучше брать всё сразу, чтобы не ездить дважды.</p>
+      </div>
+    </div>
+    <div class="notice" data-ru="Информация актуальна на {year}. Законы иногда меняются — перед важным шагом лучше уточнить на официальных сайтах или у юристов из Telegram." data-uk="Інформація актуальна на {year}. Закони іноді змінюються — перед важливим кроком краще уточнити на офіційних сайтах або у юристів із Telegram.">
+      Информация актуальна на <span class="year-range"></span>. Законы иногда меняются — перед важным шагом лучше уточнить на официальных сайтах или у юристов из Telegram.
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span data-ru="Українці на Кіпрі · Гід" data-uk="Українці на Кіпрі · Гід">Українці на Кіпрі · Гід</span>
+  <span data-ru="Обновлено" data-uk="Оновлено">Обновлено <span class="year-range"></span></span>
+</footer>
+
+<script>
+  const y = new Date().getFullYear();
+  const yearStr = y + '–' + (y + 1);
+
+  // Set year ranges
+  document.querySelectorAll('.year-range').forEach(el => el.textContent = yearStr);
+
+  // Language toggle
+  let currentLang = 'ru';
+
+  function toggleLang() {
+    currentLang = currentLang === 'ru' ? 'uk' : 'ru';
+    const btn = document.getElementById('langBtn');
+    btn.textContent = currentLang === 'ru' ? 'УК' : 'РУ';
+    btn.classList.toggle('uk', currentLang === 'uk');
+    applyLang();
+  }
+
+  function applyLang() {
+    const lang = currentLang;
+    document.querySelectorAll('[data-ru]').forEach(el => {
+      const text = el.getAttribute('data-' + lang);
+      if (!text) return;
+      // Replace {year} placeholder
+      const final = text.replace('{year}', yearStr);
+      el.innerHTML = final;
+      // Re-set year-range spans inside if any
+      el.querySelectorAll('.year-range').forEach(s => s.textContent = yearStr);
+    });
+  }
+</script>
+</body>
+</html>
